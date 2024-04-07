@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
    [SerializeField] private Engine _engine;
    [SerializeField] private float _constantForcePower;
+   [SerializeField] private CowCatcher _catcher;
 
    private void Awake()
    {
@@ -22,12 +23,13 @@ public class Player : MonoBehaviour
       _rigidbody = GetComponent<Rigidbody>();
       _playerInput = GetComponent<PlayerInput>();
       _constantForce = GetComponent<ConstantForce>();
+      _catcher.SetInput(_playerInput);
       _engine.Initialize(_rigidbody);
    }
 
    private void FixedUpdate()
    {
-       _constantForce.force = -Vector3.right * _playerInput.Controls.x * _constantForcePower;
+       _constantForce.force = -Vector3.right * _playerInput.Controls.x * _constantForcePower + Physics.gravity * _rigidbody.mass;
    }
 
    private void Update()

@@ -100,7 +100,7 @@ public class Engine : MonoBehaviour
 
    public void Damping()
    {
-       _springSpeed = (distance - _lastDistance) * Time.fixedTime;
+       _springSpeed = (distance - _lastDistance) * Time.fixedDeltaTime;
        _springSpeed = Mathf.Max(_springSpeed, 0);
        _lastDistance = distance;
    }
